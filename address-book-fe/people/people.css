@@ -1,0 +1,177 @@
+@import "../css/reset.css";
+@import "../css/variables.css";
+@import "../css/general.css";
+
+.person-container {
+  color: var(--primary-color-text);
+  background: var(--primary-color);
+  border-radius: 1rem;
+  display: flex;
+  gap: var(--spacing-default);
+  justify-content: center;
+  max-width: 70%;
+  margin-bottom: var(--spacing-extra-big);
+  padding: var(--spacing-big);
+}
+
+.header-card {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-card i {
+  padding-right: var(--spacing-small);
+}
+
+.img-container {
+  width: 65%;
+}
+
+.person-img {
+  border-right: 0.2rem solid var(--text-color-default);
+  height: 80%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.person-container h2 {
+  font-family: var(--font-family-title);
+  margin: 0;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-default);
+}
+
+.person-info-container {
+  display: flex;
+  gap: var(--spacing-extra-big);
+}
+
+address h3 {
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-h5);
+  margin: 0;
+  margin-bottom: calc(var(--spacing-small) + 0.5rem);
+}
+
+.contacts-section,
+.hobbies-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-default);
+}
+.contacts-section {
+  gap: var(--spacing-small);
+}
+
+.contacts-section li span {
+  width: 3rem;
+}
+
+.contacts-section li {
+  align-items: center;
+  background-color: var(--primary-color-middle);
+  border-radius: 0.5rem;
+  display: flex;
+  gap: var(--spacing-extra-big);
+  padding: var(--spacing-default) calc(var(--spacing-default) + 0.5rem);
+}
+
+.contacts-section a:link,
+.contacts-section a:visited {
+  color: var(--primary-color-text);
+  font-weight: 100;
+  &:hover {
+    color: var(--secondary-color);
+  }
+}
+
+.hobbies-section li {
+  align-items: center;
+  display: flex;
+  gap: calc(var(--spacing-small) + 0.5);
+}
+
+.bio-section {
+  background-color: var(--background-color);
+  border: 0.2rem solid var(--text-color-default);
+  border-radius: 0.5rem;
+  color: var(--primary-color);
+  padding: var(--spacing-default);
+}
+
+.bio-section h3 {
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-h5);
+  margin: 0;
+}
+
+@media (max-width: 84em) {
+  .img-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 76em) {
+  .img-container {
+    max-width: 40%;
+  }
+
+  .person-img {
+    height: 100%;
+  }
+
+  .person-container {
+    flex-wrap: wrap;
+    max-width: 80%;
+  }
+
+  .person-container h2 {
+    text-align: center;
+  }
+
+  .person-info-container {
+    justify-content: space-evenly;
+    margin: var(--spacing-extra-big) 0;
+  }
+}
+
+@media (max-width: 44em) {
+  .img-container {
+    max-width: 60%;
+  }
+  .person-info-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .header-card {
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: end;
+  }
+
+  button {
+    padding-left: calc(var(--spacing-small) - 0.5rem);
+    padding-right: calc(var(--spacing-small) - 0.5rem);
+  }
+}
+
+@media (max-width: 24em) {
+  .img-container {
+    max-width: 80%;
+  }
+  .person-container {
+    padding: calc(var(--spacing-small) + 0.5rem);
+  }
+  .contacts-section li {
+    flex-direction: column;
+    gap: var(--spacing-default);
+    padding: var(--spacing-small) calc(var(--spacing-small) + 0.5rem);
+  }
+}

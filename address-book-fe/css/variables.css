@@ -1,0 +1,80 @@
+:root {
+  --white: #fff;
+
+  --gray-500: #f2f2f2;
+  --gray-800: #333333;
+
+  --blue-300: #cfe5fa;
+  --blue-400: #65a2fc;
+  --blue-500: #2375ce;
+
+  --pink-200: #f2a0d5;
+  --pink-300: #d92b8b;
+  --pink-400: #d9329e;
+  --pink-500: #733657;
+  --pink-800: #59023b;
+
+  --yellow-500: #feff74;
+  --yellow-800: #fcd748;
+
+  --red: #bf0426;
+
+  --black: #333;
+
+  --font-family-default: "Roboto", sans-serif;
+  --font-family-title: "Lobster", serif;
+
+  --font-size-h1: 5.2rem;
+  --font-size-h2: 4.4rem;
+  --font-size-h3: 3.6rem;
+  --font-size-h4: 3rem;
+  --font-size-h5: 2.4rem;
+  --font-size-h6: 2rem;
+
+  --font-size-p-big: 1.8rem;
+  --font-size-p-default: 1.6rem;
+  --font-size-p-small: 1.4rem;
+
+  --spacing-small: 1rem;
+  --spacing-default: 2rem;
+  --spacing-big: 3rem;
+  --spacing-extra-big: 5rem;
+}
+
+.light {
+  --background-color: var(--white);
+  --text-color-default: var(--black);
+
+  --primary-color: var(--blue-500);
+  --primary-color-text: var(--white);
+
+  --primary-color-middle: var(--blue-400);
+  --primary-color-light: var(--blue-300);
+
+  --secondary-color: var(--yellow-500);
+  --secondary-color-dark: var(--yellow-800);
+  --secondary-color-text: var(--blue-500);
+
+  --tertiary-color: var(--gray-500);
+
+  --delete-button-color: var(--red);
+}
+
+.dark {
+  --background-color: var(--black);
+  --text-color-default: var(--white);
+
+  --primary-color: var(--pink-300);
+  --primary-color-text: var(--black);
+
+  --primary-color-middle: var(--pink-400);
+  --primary-color-light: var(--pink-500);
+
+  --secondary-color: var(--pink-800);
+  --secondary-color-dark: var(--pink-300);
+  --secondary-color-text: var(--pink-300);
+
+  --tertiary-color: var(--gray-800);
+
+  --delete-button-color: var(--pink-200);
+}

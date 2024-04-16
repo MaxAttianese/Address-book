@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Add a description of site for help SEO-->
+    <meta name="description" content="..." />
+    <!--Add Favicon for Desktop-->
+    <link rel="icon" href="#" />
+    <!--Add Favicon for Smartphone Apple-->
+    <link rel="apple-touch-icon" href="#" />
+    <!--Add Favicon for Smartphone Android-->
+    <!--<link rel="manifest" href="#">-->
+    <!--Font Awesome-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!--Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!--Css-->
+    <link rel="stylesheet" href="./css/index.css" />
+    <title>Max's Address Book</title>
+  </head>
+  <body>
+    <header>
+      <a href="./index.html" title="Torna alla Homepage">
+        <div class="icon-container">
+          <i class="fa-solid fa-phone-flip"></i>
+        </div>
+        <h1>Rubrica</h1>
+        <abbr title="Cascade Style Sheets">Css</abbr>
+      </a>
+    </header>
+    <menu>
+      <button type="click" id="change-view" class="button-view">
+        <i id="icon-view" class="fa-solid"></i>
+      </button>
+      <button type="click" id="change-theme" class="button-theme">
+        <i class="fa-solid fa-yin-yang"></i>
+      </button>
+    </menu>
+    <main>
+      <section class="form-section">
+        <div>
+          <h3>Nuova Persona</h3>
+          <form id="add-form" action="#">
+            <div>
+              <label for="firstname"></label>
+              <input id="firstname" type="text" placeholder="Nome" />
+              <button id="firstname-clean" class="button-icon" type="click">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <div>
+              <label for="lastname"></label>
+              <input id="lastname" type="text" placeholder="Cognome" />
+              <button id="lastname-clean" class="button-icon" type="click">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <button id="submit-add-form" type="submit">Aggiungi</button>
+          </form>
+        </div>
+        <div>
+          <h3>Cerca</h3>
+          <form id="search-form" action="#">
+            <div>
+              <label for="search"></label>
+              <input id="search" type="text" placeholder="Nome e/o Cognome" />
+              <button id="search-clean" class="button-icon" type="click">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <button id="submit-search-form" type="submit" class="button-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+        </div>
+      </section>
+      <section class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Cognome</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="table-append">
+
+            <tr>
+              <td>
+                <span>
+                  <a
+                    href="./people/1-max-attianese.html"
+                    title="Apri la pagina del dettaglio"
+                    >0</a
+                  >
+                </span>
+              </td>
+              <td><div>Example</div></td>
+              <td><div>Example</div></td>
+              <td>
+                <button type="click" class="button-icon-delete">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </section>
+
+      <section id="card-append" class="card-container">
+
+        <article>
+          <div>
+            <div class="overlay">
+              <a
+                href="./people/1-max-attianese.html"
+                title="Apri la pagina del dettaglio"
+                >0</a
+              >
+            </div>
+            <img
+              src="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
+              alt="person icon"
+            />
+          </div>
+          <address>
+            <h3 class="card-firstname">Example</h3>
+            <h3 class="card-lastname">Example</h3>
+          </address>
+          <button type="click" class="button-icon-delete">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </article>
+
+
+      </section>
+      <aside>
+        <strong>Talent Academy | </strong><span>Front-end Basics</span>
+      </aside>
+    </main>
+    <footer>
+      <h2>Max's Address Book</h2>
+    </footer>
+    <script src="./js/index.js"></script>
+  </body>
+</html>

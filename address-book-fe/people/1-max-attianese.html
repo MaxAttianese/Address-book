@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Add a description of site for help SEO-->
+    <meta name="description" content="..." />
+    <!--Add Favicon for Desktop-->
+    <link rel="icon" href="#" />
+    <!--Add Favicon for Smartphone Apple-->
+    <link rel="apple-touch-icon" href="#" />
+    <!--Add Favicon for Smartphone Android-->
+    <!--<link rel="manifest" href="#">-->
+    <!--Font Awesome-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!--Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!--Css-->
+    <link rel="stylesheet" href="./people.css" />
+    <title>Max's Address Book</title>
+  </head>
+  <body>
+    <header>
+      <a href="../index.html" title="Torna alla Homepage">
+        <div class="icon-container">
+          <i class="fa-solid fa-phone-flip"></i>
+        </div>
+        <h1>Rubrica</h1>
+        <abbr title="Cascade Style Sheets">Css</abbr>
+      </a>
+    </header>
+    <menu>
+      <button type="click" id="change-theme" class="button-theme">
+        <i class="fa-solid fa-yin-yang"></i>
+      </button>
+    </menu>
+    <main>
+      <section class="person-container">
+        <div class="img-container">
+          <img
+            src="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
+            alt="person icon"
+            class="person-img"
+          />
+        </div>
+        <div class="info-container">
+          <div class="header-card">
+            <h2>Massimiliano Attianese</h2>
+            <button type="click" class="button-secondary"><i class="fa-solid fa-pencil"></i>Modifica</button>
+          </div>
+          <address class="person-info-container">
+            <div>
+              <h3>Contatti</h3>
+              <ul class="contacts-section">
+                <li>
+                  <span>Email</span>
+                  <a
+                    href="mailto:maxattianesekr94@gmail.com"
+                    title="Manda un email a questo indirizzo"
+                    >maxattianesekr94@gmail.com</a
+                  >
+                </li>
+                <li>
+                  <span>Telefono</span>
+                  <a href="tel:+393203120717" title="Chiama questo numero"
+                    >(+39) 320 312 0717</a
+                  >
+                </li>
+                <li>
+                  <span>Website</span>
+                  <a
+                    href="www.maxattianese.com"
+                    target="_blank"
+                    title="Apri la pagina del sito"
+                    >www.maxattianese.com</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3>Hobbies</h3>
+              <ul class="hobbies-section">
+                <li>
+                  <span><i class="fa-solid fa-gamepad"></i></span> Videogame
+                </li>
+                <li>
+                  <span><i class="fa-solid fa-tv"></i></span> Guardare
+                  Film/Serie Tv
+                </li>
+                <li>
+                  <span><i class="fa-solid fa-headphones"></i></span> Ascoltare
+                  Musica
+                </li>
+              </ul>
+            </div>
+          </address>
+          <div class="bio-section">
+            <h3>Bio</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatem eum tempore, in quidem hic illum quasi laborum neque
+              officiis obcaecati odit, expedita consequuntur? Asperiores, dicta
+              fuga repellat praesentium vel expedita.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+              obcaecati necessitatibus dolor labore at deserunt rerum doloribus.
+              Esse necessitatibus minima in repudiandae est illum accusantium?
+              Facilis sint ad vero commodi?
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <h2>Max's Address Book</h2>
+    </footer>
+    <script src="../js/index.js"></script>
+  </body>
+</html>

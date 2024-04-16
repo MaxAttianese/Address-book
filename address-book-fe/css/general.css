@@ -1,0 +1,267 @@
+@import "./variables.css";
+
+html {
+  font-size: 10px;
+  font-family: var(--font-family-default);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color-default);
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-p-default);
+  height: 100vh;
+  min-width: 300px;
+}
+
+header {
+  align-items: center;
+  background-color: var(--primary-color);
+  color: var(--primary-color-text);
+  display: flex;
+  height: auto;
+  justify-content: center;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: var(--spacing-extra-big);
+}
+
+aside {
+  margin: calc(var(--spacing-extra-big) + 2.5rem) 0;
+}
+
+a:link,
+a:visited {
+  cursor: pointer;
+
+  &:hover {
+    color: var(--secondary-color);
+  }
+}
+
+abbr {
+  font-size: var(--font-size-h1);
+  text-decoration: none;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  margin: calc(var(--font-size-h1) * 0.42) 0;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  margin: calc(var(--font-size-h2) * 0.45) 0;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  margin: calc(var(--font-size-h3) * 0.50) 0;
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  margin: calc(var(--font-size-h4) * 0.73)  0;
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  margin: calc(var(--font-size-h5) * 0.96)  0;
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+  margin: calc(var(--font-size-h1) * 1.2)  0;
+}
+
+p {
+  margin: calc(var(--font-size-p-default) * 1) 0;
+}
+
+menu {
+  background-image: linear-gradient(
+    to right,
+    var(--tertiary-color),
+    var(--primary-color-light)
+  );
+  display: flex;
+  max-width: 100%;
+  justify-content: end;
+  padding: 0 var(--spacing-extra-big);
+}
+
+button {
+  background-color: var(--primary-color);
+  border: 0.2rem solid var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--primary-color-text);
+  cursor: pointer;
+  padding: calc(var(--spacing-small) - 0.15rem)
+    calc(var(--spacing-default) + 0.5rem);
+  transition: all 500ms;
+
+  &:hover {
+    background-color: var(--primary-color-middle);
+    border-color: var(--primary-color-middle);
+    color: var(--text-color-default);
+  }
+}
+
+.button-outlined {
+  background-color: transparent;
+  color: var(--primary-color);
+  transition: all 500ms;
+
+  &:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color-dark);
+  }
+}
+
+.button-secondary {
+  background-color: var(--background-color);
+  border: 0.2rem solid var(--background-color);
+  color: var(--primary-color);
+  transition: all 500ms;
+
+  &:hover {
+    background-color: var(--primary-color-light);
+    border-color: var(--primary-color-light);
+    color: var(--primary-color);
+  }
+}
+
+input {
+  background-color: var(--background-color);
+  border: 0.1rem solid var(--primary-color);
+  border-radius: 0.5rem;
+  color: var(--text-color-default);
+  padding: calc(var(--spacing-small) - 0.2rem) var(--spacing-extra-big)
+    calc(var(--spacing-small) - 0.2rem) var(--spacing-small);
+
+  &:focus {
+    border: 0.3rem solid var(--primary-color);
+  }
+}
+
+footer {
+  color: var(--primary-color);
+  background-image: linear-gradient(
+    to right,
+    var(--tertiary-color),
+    var(--primary-color-light)
+  );
+  display: flex;
+  font-style: italic;
+  justify-content: center;
+  margin-top: auto;
+  width: 100%;
+}
+
+footer h2 {
+  font-size: var(--font-size-h4);
+}
+
+/*Navbar*/
+
+header a {
+  align-items: center;
+  color: inherit;
+  display: inherit;
+  font-family: "Lobster", serif;
+  gap: 1rem;
+  justify-content: center;
+  text-decoration: none;
+}
+
+header h1 {
+  margin: calc(var(--spacing-small) + 0.2rem) 0;
+}
+
+.button-theme,
+.button-view,
+.button-icon,
+.button-icon-delete {
+  color: var(--text-color-default);
+  background-color: transparent;
+  border: 0;
+  font-size: var(--font-size-h5);
+  transition: all 500ms;
+
+  &:hover {
+    color: var(--text-color-default);
+    background-color: transparent;
+  }
+}
+
+.button-icon,
+.button-icon-delete {
+  font-size: var(--font-size-h6);
+  padding: calc(var(--spacing-small) - 0.15rem) var(--spacing-default);
+  transition: all 500ms;
+
+  &:hover {
+    color: var(--delete-button-color);
+  }
+}
+
+body.dark .button-theme {
+  transform: rotate(180deg);
+  transition: all 500ms;
+}
+
+.icon-container {
+  align-items: center;
+  color: var(--primary-color);
+  background-color: var(--background-color);
+  border-radius: 0.4rem;
+  font-size: var(--font-size-h5);
+  display: flex;
+  height: 3.8rem;
+  justify-content: center;
+  width: 3.8rem;
+}
+
+a:hover .icon-container {
+  background-color: var(--secondary-color);
+}
+
+.visible {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 30em) {
+  .icon-container {
+    font-size: var(--font-size-p-big);
+    height: 3rem;
+    width: 3rem;
+  }
+
+  header,
+  header h1,
+  header abbr {
+    font-size: var(--font-size-h4);
+  }
+
+  menu {
+    padding: 0 var(--spacing-small);
+  }
+
+  .button-icon {
+    padding: calc(var(--spacing-small) - 0.15rem) var(--spacing-small);
+  }
+
+  footer h2 {
+    font-size: var(--font-size-h5);
+  }
+}
