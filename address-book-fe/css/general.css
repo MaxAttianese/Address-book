@@ -186,8 +186,7 @@ header h1 {
 
 .button-theme,
 .button-view,
-.button-icon,
-.button-icon-delete {
+.button-icon {
   color: var(--text-color-default);
   background-color: transparent;
   border: 0;

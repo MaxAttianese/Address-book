@@ -97,7 +97,6 @@ async function getData() {
   try {
     const response = await fetch("http://localhost:8000/");
     const data = await response.json();
-    generateId(data);
     domContstruct(data);
   } catch (error) {
     throw new Error("Ops.. It was wrong!");
@@ -109,13 +108,14 @@ getData();
 // GENERATE ID
 let id = 0;
 function generateId(users) {
-  id = users[users.length - 1].id + 1;
+  id = `${+users[users.length - 1].id + 1}`;
 }
 
 // DOM
 
 const tableAppend = document.getElementById("table-append");
 const cardAppend = document.getElementById("card-append");
+let buttonsDelete = [];
 
 function domContstruct(users) {
   console.log(users);
@@ -149,10 +149,12 @@ function domContstruct(users) {
 
     let tdButton = document.createElement("td");
     let buttonDelete = document.createElement("button");
-    buttonDelete.setAttribute("id", users[i].id);
     buttonDelete.setAttribute("type", "click");
-    buttonDelete.classList.add("button-icon-delete");
+    buttonDelete.classList.add("button-icon");
     tdButton.appendChild(buttonDelete);
+    buttonDelete.addEventListener("click", ()=>{
+      sendDataForDelete(users[i].id)
+    })
     let iconTrash = document.createElement("i");
     iconTrash.classList.add("fa-solid", "fa-trash-can");
     buttonDelete.appendChild(iconTrash);
@@ -174,14 +176,14 @@ const searchButton = document.getElementById("submit-search-form");
 const searchInput = document.getElementById("search");
 const searchInputClean = document.getElementById("search-clean");
 
+
+
 addForm.addEventListener("submit", (event) => {
   event.preventDefault();
-
   if (!event.target.firstname.value || !event.target.lastname.value) {
     alert("Compila i campi");
     return;
   }
-
   const user = {
     id: id,
     firstname: event.target.firstname.value.replace(
@@ -191,9 +193,7 @@ addForm.addEventListener("submit", (event) => {
       event.target.lastname.value[0],
       event.target.lastname.value[0].toUpperCase()),
   };
-
   sendDataForCreate(user);
-
   addForm.reset();
 });
 
@@ -202,17 +202,18 @@ function sendDataForCreate(user) {
     fetch("http://localhost:8000/add-user", {
       method: "POST",
       body: JSON.stringify(user),
-    }).then((res) => console.log(res));
+    }).then((res) => res);
   } catch (error) {
     console.log(error);
   }
 }
 
 function sendDataForDelete(id) {
+  console.log(id);
   try {
-    fetch("http://localhost:8000/delete-user", {
-      method: "POST",
-      body: JSON.stringify(id),
+    fetch(`http://localhost:8000/delete-user/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
     }).then((res) => console.log(res));
   } catch (error) {
     console.log(error);

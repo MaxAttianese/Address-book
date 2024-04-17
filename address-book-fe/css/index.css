@@ -5,6 +5,7 @@
 .table-container {
   border: 0.2rem solid var(--primary-color-light);
   border-radius: 1.1rem;
+  margin-top: var(--spacing-default);
   overflow: hidden;
   width: 40rem;
 }
@@ -96,6 +97,7 @@ tr:hover a:hover {
   flex-wrap: wrap;
   gap: calc(var(--spacing-extra-big) * 2);
   justify-content: space-evenly;
+  margin-top: var(--spacing-default);
   width: 100%;
 }
 
