@@ -7,13 +7,14 @@ fastify.addHook("onRequest", (request, reply, done) => {
   );
   reply.header(
     "access-control-allow-methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
+    "GET, POST, OPTIONS, PUT, DELETE"
   );
   reply.header(
-    "Access-Control-Allow-HEADERS",
-    "Origin, Content-Type, Authorization"
+    "Access-Control-Allow-Headers",
+    "Content-Type"
   );
   reply.header("Content-Type", "application/json");
+
   done();
 });
 
@@ -29,7 +30,6 @@ fastify.get("/", async (request, reply) => {
 
 
 fastify.post("/add-user", async (request, reply) => {
-  
   try {
     const response = await fetch("http://localhost:3000/users", {
       method: "POST",
@@ -41,12 +41,20 @@ fastify.post("/add-user", async (request, reply) => {
   }
 });
 
+fastify.options("/delete-user/:id", (request, reply, done) => {
+    reply.header("access-control-allow-origin", "*");
+    reply.header(
+      "access-control-allow-methods",
+      "DELETE"
+    );
+    reply.send();
+});
+
 fastify.delete("/delete-user/:id", async (request, reply) => {
   const id = request.params.id;
   try {
     const response = await fetch(`http://localhost:3000/users/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      method: "DELETE"
     });
     reply.send({message: "Utente eliminato con successo"});
   } catch (error) {

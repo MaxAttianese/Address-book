@@ -97,7 +97,11 @@ async function getData() {
   try {
     const response = await fetch("http://localhost:8000/");
     const data = await response.json();
-    domContstruct(data);
+    generateId(data);
+    showMessage(data);
+
+    domContstructTable(data);
+    domContstructCard(data); //Condizione con card
   } catch (error) {
     throw new Error("Ops.. It was wrong!");
   }
@@ -108,17 +112,31 @@ getData();
 // GENERATE ID
 let id = 0;
 function generateId(users) {
-  id = `${+users[users.length - 1].id + 1}`;
+  if (users.length > 0) {
+    id = `${+users[users.length - 1].id + 1}`;
+  } else {
+    id = "1";
+  }
+}
+
+// MESSAGE FOR NONE USER
+
+const messageContainer = document.getElementById("none-user");
+
+function showMessage(users) {
+  if (users.length > 0) {
+    messageContainer.classList.add("hidden");
+  } else {
+    messageContainer.classList.remove("hidden");
+  }
 }
 
 // DOM
 
 const tableAppend = document.getElementById("table-append");
 const cardAppend = document.getElementById("card-append");
-let buttonsDelete = [];
 
-function domContstruct(users) {
-  console.log(users);
+function domContstructTable(users) {
   for (let i = 0; i < users.length; i++) {
     let tr = document.createElement("tr");
 
@@ -152,15 +170,74 @@ function domContstruct(users) {
     buttonDelete.setAttribute("type", "click");
     buttonDelete.classList.add("button-icon");
     tdButton.appendChild(buttonDelete);
-    buttonDelete.addEventListener("click", ()=>{
-      sendDataForDelete(users[i].id)
-    })
+    buttonDelete.addEventListener("click", () => {
+      alert("Sei sicuro di volere eliminare questo utente?");
+      sendDataForDelete(users[i].id);
+    });
     let iconTrash = document.createElement("i");
     iconTrash.classList.add("fa-solid", "fa-trash-can");
     buttonDelete.appendChild(iconTrash);
     tr.appendChild(tdButton);
 
     tableAppend.appendChild(tr);
+  }
+}
+
+console.log(cardAppend);
+
+function domContstructCard(users) {
+  for (let i = 0; i < users.length; i++) {
+    let article = document.createElement("article");
+
+    let imgLinkContainer = document.createElement("div");
+    article.appendChild(imgLinkContainer);
+
+    let overlay = document.createElement("div");
+    overlay.classList.add("overlay");
+    imgLinkContainer.appendChild(overlay);
+
+    let idLink = document.createElement("a");
+    idLink.setAttribute("href", `/people`);
+    idLink.setAttribute("title", "Apri la pagina del dettaglio");
+    idLink.textContent = users[i].id;
+    overlay.appendChild(idLink);
+
+    let img = document.createElement("img");
+    img.setAttribute(
+      "src",
+      "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
+    );
+    img.setAttribute("alt", `Foto ${users[i].firstname}`);
+    imgLinkContainer.appendChild(img);
+
+    let address = document.createElement("address");
+
+    let firstname = document.createElement("h3");
+    firstname.classList.add("card-firstname");
+    firstname.textContent = users[i].firstname;
+    address.appendChild(firstname);
+
+    let lastname = document.createElement("h3");
+    lastname.classList.add("card-lastname");
+    lastname.textContent = users[i].lastname;
+    address.appendChild(lastname);
+
+    article.appendChild(address);
+
+    let buttonDelete = document.createElement("button");
+    buttonDelete.setAttribute("type", "click");
+    buttonDelete.classList.add("button-icon");
+    buttonDelete.addEventListener("click", () => {
+      alert("Sei sicuro di volere eliminare questo utente?");
+      sendDataForDelete(users[i].id);
+    });
+    let iconTrash = document.createElement("i");
+    iconTrash.classList.add("fa-solid", "fa-trash-can");
+    buttonDelete.appendChild(iconTrash);
+
+    article.appendChild(buttonDelete);
+
+    cardAppend.appendChild(article);
   }
 }
 
@@ -176,8 +253,6 @@ const searchButton = document.getElementById("submit-search-form");
 const searchInput = document.getElementById("search");
 const searchInputClean = document.getElementById("search-clean");
 
-
-
 addForm.addEventListener("submit", (event) => {
   event.preventDefault();
   if (!event.target.firstname.value || !event.target.lastname.value) {
@@ -188,10 +263,12 @@ addForm.addEventListener("submit", (event) => {
     id: id,
     firstname: event.target.firstname.value.replace(
       event.target.firstname.value[0],
-      event.target.firstname.value[0].toUpperCase()),
+      event.target.firstname.value[0].toUpperCase()
+    ),
     lastname: event.target.lastname.value.replace(
       event.target.lastname.value[0],
-      event.target.lastname.value[0].toUpperCase()),
+      event.target.lastname.value[0].toUpperCase()
+    ),
   };
   sendDataForCreate(user);
   addForm.reset();
@@ -209,12 +286,12 @@ function sendDataForCreate(user) {
 }
 
 function sendDataForDelete(id) {
-  console.log(id);
   try {
     fetch(`http://localhost:8000/delete-user/${id}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => console.log(res));
+    }).then((res) => {
+      console.log(res);
+    });
   } catch (error) {
     console.log(error);
   }
@@ -224,7 +301,6 @@ searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   console.log(event.target.search.value);
 });
-
 
 // CLEAR FORM
 

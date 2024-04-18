@@ -218,6 +218,11 @@ form div button {
   }
 }
 
+#none-user {
+  color: var(--primary-color);
+  font-size: var(--font-size-h6);
+}
+
 /*Media Queries*/
 
 @media (max-width: 72em) {
@@ -265,6 +270,11 @@ form div button {
     flex-direction: column;
     justify-content: center;
   }
+
+  article {
+    padding: 0 var(--spacing-default) 0 var(--spacing-default);
+    margin: 0;
+  }
 }
 
 @media (max-width: 25em) {
@@ -286,10 +296,5 @@ form div button {
   tr td:first-child {
     font-weight: bold;
     width: 3rem;
-  }
-
-  article {
-    padding: 0 0 0 var(--spacing-default);
-    margin: 0;
   }
 }

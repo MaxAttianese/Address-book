@@ -93,7 +93,7 @@ address h3 {
 .hobbies-section li {
   align-items: center;
   display: flex;
-  gap: calc(var(--spacing-small) + 0.5);
+  gap: calc(var(--spacing-small) + 0.5rem);
 }
 
 .bio-section {

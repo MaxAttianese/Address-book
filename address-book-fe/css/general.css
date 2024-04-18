@@ -34,6 +34,7 @@ main {
 
 aside {
   margin: calc(var(--spacing-extra-big) + 2.5rem) 0;
+  text-align: center;
 }
 
 a:link,
