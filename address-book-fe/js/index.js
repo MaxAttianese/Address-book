@@ -36,7 +36,9 @@ const iconView = document.getElementById("icon-view");
 
 const table = document.querySelector(".table-container");
 const card = document.querySelector(".card-container");
-
+window.addEventListener("resize", () => {
+  console.log(window.innerWidth);
+});
 if (
   sessionStorage.getItem("view") == "table" &&
   !table.classList.contains("visible") &&
@@ -110,7 +112,7 @@ async function getData() {
 getData();
 
 // GENERATE ID
-let id = 0;
+let id = "1";
 function generateId(users) {
   if (users.length > 0) {
     id = `${+users[users.length - 1].id + 1}`;
@@ -167,12 +169,14 @@ function domContstructTable(users) {
 
     let tdButton = document.createElement("td");
     let buttonDelete = document.createElement("button");
-    buttonDelete.setAttribute("type", "click");
+    buttonDelete.setAttribute("type", "button");
     buttonDelete.classList.add("button-icon");
     tdButton.appendChild(buttonDelete);
     buttonDelete.addEventListener("click", () => {
-      alert("Sei sicuro di volere eliminare questo utente?");
-      sendDataForDelete(users[i].id);
+      const response = confirm("Sei sicuro di volere eliminare questo utente?");
+      if (response) {
+        sendDataForDelete(users[i].id);
+      }
     });
     let iconTrash = document.createElement("i");
     iconTrash.classList.add("fa-solid", "fa-trash-can");
@@ -225,11 +229,13 @@ function domContstructCard(users) {
     article.appendChild(address);
 
     let buttonDelete = document.createElement("button");
-    buttonDelete.setAttribute("type", "click");
+    buttonDelete.setAttribute("type", "button");
     buttonDelete.classList.add("button-icon");
     buttonDelete.addEventListener("click", () => {
-      alert("Sei sicuro di volere eliminare questo utente?");
-      sendDataForDelete(users[i].id);
+      const response = confirm("Sei sicuro di volere eliminare questo utente?");
+      if (response) {
+        sendDataForDelete(users[i].id);
+      }
     });
     let iconTrash = document.createElement("i");
     iconTrash.classList.add("fa-solid", "fa-trash-can");
