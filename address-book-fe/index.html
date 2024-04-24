@@ -3,14 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--Add a description of site for help SEO-->
-    <meta name="description" content="..." />
-    <!--Add Favicon for Desktop-->
-    <link rel="icon" href="#" />
-    <!--Add Favicon for Smartphone Apple-->
-    <link rel="apple-touch-icon" href="#" />
-    <!--Add Favicon for Smartphone Android-->
-    <!--<link rel="manifest" href="#">-->
     <!--Font Awesome-->
     <link
       rel="stylesheet"
@@ -41,7 +33,7 @@
       </a>
     </header>
     <menu>
-      <button type="click" id="change-theme" class="button-theme">
+      <button type="button" id="change-theme" class="button-theme">
         <i class="fa-solid fa-yin-yang"></i>
       </button>
     </menu>
@@ -49,7 +41,11 @@
       <section class="form-section">
         <div>
           <h3>Nuova Persona</h3>
-          <form id="add-form" action="#">
+          <form
+            id="add-form"
+            action="http://localhost:8000/add-user"
+            method="POST"
+          >
             <div>
               <label for="firstname"></label>
               <input id="firstname" type="text" placeholder="Nome" />
@@ -69,7 +65,7 @@
         </div>
         <div>
           <h3>Cerca</h3>
-          <form id="search-form" action="#">
+                    <form id="search-form" action="http://localhost:8000/search-user" method="POST">
             <div>
               <label for="search"></label>
               <input id="search" type="text" placeholder="Nome e/o Cognome" />
@@ -102,7 +98,6 @@
           <tbody id="table-append"></tbody>
         </table>
       </section>
-
       <section id="card-append" class="card-container"></section>
       <aside>
         <p id="none-user">
@@ -114,6 +109,6 @@
     <footer>
       <h2>Max's Address Book</h2>
     </footer>
-    <script src="./js/index.js"></script>
+    <script type="module" src="./js/index.js"></script>
   </body>
 </html>

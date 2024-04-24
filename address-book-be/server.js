@@ -1,18 +1,12 @@
 const fastify = require("fastify")({ logger: true });
 
 fastify.addHook("onRequest", (request, reply, done) => {
-  reply.header(
-    "access-control-allow-origin",
-    "*"
-  );
+  reply.header("access-control-allow-origin", "*");
   reply.header(
     "access-control-allow-methods",
     "GET, POST, OPTIONS, PUT, DELETE"
   );
-  reply.header(
-    "Access-Control-Allow-Headers",
-    "Content-Type"
-  );
+  reply.header("Access-Control-Allow-Headers", "Content-Type");
   reply.header("Content-Type", "application/json");
 
   done();
@@ -28,35 +22,33 @@ fastify.get("/", async (request, reply) => {
   }
 });
 
-
 fastify.post("/add-user", async (request, reply) => {
   try {
     const response = await fetch("http://localhost:3000/users", {
       method: "POST",
       body: request.body,
     });
-    return response;
+    return request.body;
   } catch (error) {
-    throw new Error("Si è verificato iun errore!");
+    throw new Error("Si è verificato un errore!");
   }
 });
 
 fastify.options("/delete-user/:id", (request, reply, done) => {
-    reply.header("access-control-allow-origin", "*");
-    reply.header(
-      "access-control-allow-methods",
-      "DELETE"
-    );
-    reply.send();
+  reply.header("access-control-allow-origin", "*");
+  reply.header("access-control-allow-methods", "DELETE");
+  reply.send();
 });
 
 fastify.delete("/delete-user/:id", async (request, reply) => {
   const id = request.params.id;
+  console.log(id);
   try {
     const response = await fetch(`http://localhost:3000/users/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
     });
-    reply.send({message: "Utente eliminato con successo"});
+    const data = await response.json();
+    return data;
   } catch (error) {
     throw new Error("Si è verificato iun errore!");
   }
