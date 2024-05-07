@@ -232,10 +232,6 @@ a:hover .icon-container {
   background-color: var(--secondary-color);
 }
 
-.hidden {
-  display: none;
-}
-
 @media (max-width: 30em) {
   .icon-container {
     font-size: var(--font-size-p-big);

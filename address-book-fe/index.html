@@ -65,7 +65,11 @@
         </div>
         <div>
           <h3>Cerca</h3>
-                    <form id="search-form" action="http://localhost:8000/search-user" method="POST">
+          <form
+            id="search-form"
+            action="http://localhost:8000/search-user"
+            method="POST"
+          >
             <div>
               <label for="search"></label>
               <input id="search" type="text" placeholder="Nome e/o Cognome" />
@@ -84,21 +88,23 @@
           <i id="icon-view" class="fa-solid"></i>
         </button>
       </div>
-      <section class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Cognome</th>
-              <th></th>
-            </tr>
-          </thead>
+      <section id="table">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th></th>
+              </tr>
+            </thead>
 
-          <tbody id="table-append"></tbody>
-        </table>
+            <tbody id="table-append"></tbody>
+          </table>
+        </div>
       </section>
-      <section id="card-append" class="card-container"></section>
+      <section id="card-append" class="card-container hidden"></section>
       <aside>
         <p id="none-user">
           Non vi sono utenti nella tua rubrica, aggiungine qualcuno

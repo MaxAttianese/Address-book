@@ -224,6 +224,10 @@ form div button {
   font-size: var(--font-size-h6);
 }
 
+.hidden {
+  display: none;
+}
+
 /*Media Queries*/
 
 @media (max-width: 72em) {

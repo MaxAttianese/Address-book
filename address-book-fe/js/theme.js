@@ -1,4 +1,4 @@
-const button = document.getElementById("change-theme");
+const buttonTheme = document.getElementById("change-theme");
 
 if (sessionStorage.getItem("theme") == "light") {
   document.body.classList.add("light");
@@ -18,7 +18,7 @@ if (sessionStorage.getItem("theme") == "light") {
   document.body.classList.add("light");
 }
 
-button.addEventListener("click", () => {
+buttonTheme.addEventListener("click", () => {
   if (document.body.classList.contains("light")) {
     document.body.classList.replace("light", "dark");
     sessionStorage.setItem("theme", "dark");
