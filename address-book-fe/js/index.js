@@ -5,13 +5,20 @@ import "./clear.js";
 const addForm = document.getElementById("add-form");
 const tableContainer = document.getElementById("table-append");
 const cardContainer = document.getElementById("card-append");
-const messageContainer = document.getElementById("none-user");
+const messageNoneContainer = document.getElementById("none-user");
 const tableSection = document.querySelector(".table-container");
-
+const messageContainer = document.querySelector(".message-container");
 
 async function getData() {
   try {
     const response = await fetch("http://localhost:8000/");
+    if (!response.ok) {
+      createAndShowMessage(
+        "error",
+        "Si è Verificato un Errore... Siamo Spiacenti, Riprovare più Tardi"
+      );
+      throw new Error(response.statusText);
+    }
     const data = await response.json();
     let lastId = 0;
     if (data.length > 0) {
@@ -25,6 +32,10 @@ async function getData() {
       constructCardsDom(data[i]);
     }
   } catch (error) {
+    createAndShowMessage(
+      "error",
+      "Si è Verificato un Errore... Siamo Spiacenti, Riprovare più Tardi"
+    );
     throw new Error("Ops.. It was wrong!");
   }
 }
@@ -62,16 +73,29 @@ async function createRecord(people) {
       method: "POST",
       body: JSON.stringify(people),
     });
+    if (!res.ok) {
+      createAndShowMessage(
+        "error",
+        "Si è Verificato un Errore... Siamo Spiacenti, Riprovare più Tardi"
+      );
+      throw new Error(response.statusText);
+    }
     const data = await res.json();
     constructTableDom(data);
     constructCardsDom(data);
+    createAndShowMessage("successo", "Utente Inserito con Successo");
   } catch (error) {
+    createAndShowMessage(
+      "error",
+      "Si è Verificato un Errore... Siamo Spiacenti, Riprovare più Tardi"
+    );
     throw new Error("Ops.. Qualcosa è andato storto");
   }
 }
 
 function constructCardsDom(user) {
   const article = document.createElement("article");
+  article.setAttribute("data-person", user.id);
 
   const imgLinkContainer = document.createElement("div");
   article.appendChild(imgLinkContainer);
@@ -115,7 +139,7 @@ function constructCardsDom(user) {
     const response = confirm("Sei sicuro di volere eliminare questo utente?");
     const idUser = user.id;
     if (response) {
-      cardContainer.removeChild(article);
+      removeUserFromDOM(user.id);
       deleteRecord(idUser);
       showMessage();
     }
@@ -133,6 +157,7 @@ function constructCardsDom(user) {
 
 function constructTableDom(user) {
   let tr = document.createElement("tr");
+  tr.setAttribute("data-person", user.id);
 
   let tdId = document.createElement("td");
 
@@ -168,7 +193,7 @@ function constructTableDom(user) {
     const idUser = user.id;
     const response = confirm("Sei sicuro di volere eliminare questo utente?");
     if (response) {
-      tableContainer.removeChild(tr);
+      removeUserFromDOM(user.id);
       deleteRecord(idUser);
       showMessage();
     }
@@ -186,23 +211,63 @@ function constructTableDom(user) {
 }
 
 async function deleteRecord(id) {
-  console.log(id);
   try {
     const response = await fetch(`http://localhost:8000/delete-user/${id}`, {
       method: "DELETE",
     });
-    console.log(response);
+    if (!response.ok) {
+      createAndShowMessage(
+        "error",
+        "Si è Verificato un Errore... Siamo Spiacenti, Riprovare più Tardi"
+      );
+      throw new Error(response.statusText);
+    }
   } catch (error) {
-    console.log(error);
+    createAndShowMessage(
+      "error",
+      "Si è Verificato un Errore... Siamo Spiacenti, Riprovare più Tardi"
+    );
+    throw new Error(response.statusText);
   }
 }
 
 function showMessage() {
   if (!cardContainer.hasChildNodes() || !tableContainer.hasChildNodes()) {
-    messageContainer.classList.remove("hidden");
+    messageNoneContainer.classList.remove("hidden");
     tableSection.classList.add("hidden");
   } else {
-    messageContainer.classList.add("hidden");
+    messageNoneContainer.classList.add("hidden");
     tableSection.classList.remove("hidden");
   }
+}
+
+function removeUserFromDOM(id) {
+  let userContainers = document.querySelectorAll(`[data-person="${id}"]`);
+  userContainers.forEach((el) => {
+    if (el.tagName.toLocaleLowerCase() == "tr") {
+      tableContainer.removeChild(el);
+    } else if (el.tagName.toLocaleLowerCase() == "article") {
+      cardContainer.removeChild(el);
+    }
+  });
+  createAndShowMessage("success", "Utente Eliminato con Successo");
+}
+
+function createAndShowMessage(type, message) {
+  while (messageContainer.hasChildNodes()) {
+    messageContainer.removeChild(messageContainer.firstChild);
+  }
+  let samp = document.createElement("samp");
+  if (type === "error") {
+    samp.textContent = message;
+    samp.classList.add("error");
+  } else {
+    samp.textContent = message;
+    samp.classList.add("success");
+  }
+  messageContainer.appendChild(samp);
+
+  setTimeout(() => {
+    samp.classList.add("hidden");
+  }, 3000);
 }

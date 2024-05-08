@@ -228,6 +228,22 @@ form div button {
   display: none;
 }
 
+.message-container {
+  margin: 0 0 var(--spacing-default) 0;
+}
+
+.message-container samp {
+  font-size: var(--font-size-h5);
+}
+
+.success {
+  color: var(--green);
+}
+
+.error {
+  color: var(--red);
+}
+
 /*Media Queries*/
 
 @media (max-width: 72em) {
