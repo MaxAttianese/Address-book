@@ -34,6 +34,19 @@ fastify.post("/add-user", async (request, reply) => {
   }
 });
 
+//search
+/*fastify.post("/search-user", async (request, reply) => {
+    console.log(request.body);
+  try {
+    const response = await fetch("http://localhost:3000/users");
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Si è verificato iun errore!");
+  }
+});*/
+
 fastify.options("/delete-user/:id", (request, reply, done) => {
   reply.header("access-control-allow-origin", "*");
   reply.header("access-control-allow-methods", "DELETE");

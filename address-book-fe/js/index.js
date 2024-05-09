@@ -1,14 +1,17 @@
 import "./theme.js";
 import "./view.js";
 import "./clear.js";
+import {
+  tableContainer,
+  cardContainer,
+  showNoneUserMessage,
+  createAndShowMessage,
+} from "./message.js";
 
 const addForm = document.getElementById("add-form");
-const tableContainer = document.getElementById("table-append");
-const cardContainer = document.getElementById("card-append");
-const messageNoneContainer = document.getElementById("none-user");
-const tableSection = document.querySelector(".table-container");
-const messageContainer = document.querySelector(".message-container");
+const searchForm = document.getElementById("search-form");
 
+// GET DATA FROM SERVER
 async function getData() {
   try {
     const response = await fetch("http://localhost:8000/");
@@ -20,6 +23,7 @@ async function getData() {
       throw new Error(response.statusText);
     }
     const data = await response.json();
+
     let lastId = 0;
     if (data.length > 0) {
       lastId = +data[data.length - 1].id;
@@ -27,10 +31,12 @@ async function getData() {
       lastId = 0;
     }
     generateId(lastId);
+
     for (let i = 0; i < data.length; i++) {
       constructTableDom(data[i]);
       constructCardsDom(data[i]);
     }
+    showNoneUserMessage();
   } catch (error) {
     createAndShowMessage(
       "error",
@@ -41,11 +47,13 @@ async function getData() {
 }
 getData();
 
+// GENERATE ID
 let count = 0;
 function generateId(lastId) {
   count = lastId++;
 }
 
+// CREATE RECORD
 addForm.addEventListener("submit", (event) => {
   event.preventDefault();
   if (!event.target.firstname.value || !event.target.lastname.value) {
@@ -67,6 +75,7 @@ addForm.addEventListener("submit", (event) => {
   }
 });
 
+// SEND NEW RECORD TO SERVER
 async function createRecord(people) {
   try {
     const res = await fetch("http://localhost:8000/add-user", {
@@ -93,6 +102,7 @@ async function createRecord(people) {
   }
 }
 
+// DOM
 function constructCardsDom(user) {
   const article = document.createElement("article");
   article.setAttribute("data-person", user.id);
@@ -141,7 +151,7 @@ function constructCardsDom(user) {
     if (response) {
       removeUserFromDOM(user.id);
       deleteRecord(idUser);
-      showMessage();
+      showNoneUserMessage();
     }
   });
   const iconTrash = document.createElement("i");
@@ -152,7 +162,7 @@ function constructCardsDom(user) {
 
   cardContainer.appendChild(article);
 
-  showMessage();
+  showNoneUserMessage();
 }
 
 function constructTableDom(user) {
@@ -195,7 +205,7 @@ function constructTableDom(user) {
     if (response) {
       removeUserFromDOM(user.id);
       deleteRecord(idUser);
-      showMessage();
+      showNoneUserMessage();
     }
   });
 
@@ -207,9 +217,10 @@ function constructTableDom(user) {
 
   tableContainer.appendChild(tr);
 
-  showMessage();
+  showNoneUserMessage();
 }
 
+// SEND ID RECORD FOR DELETE IT
 async function deleteRecord(id) {
   try {
     const response = await fetch(`http://localhost:8000/delete-user/${id}`, {
@@ -231,16 +242,7 @@ async function deleteRecord(id) {
   }
 }
 
-function showMessage() {
-  if (!cardContainer.hasChildNodes() || !tableContainer.hasChildNodes()) {
-    messageNoneContainer.classList.remove("hidden");
-    tableSection.classList.add("hidden");
-  } else {
-    messageNoneContainer.classList.add("hidden");
-    tableSection.classList.remove("hidden");
-  }
-}
-
+// DELETE USER FROM DOM
 function removeUserFromDOM(id) {
   let userContainers = document.querySelectorAll(`[data-person="${id}"]`);
   userContainers.forEach((el) => {
@@ -250,24 +252,60 @@ function removeUserFromDOM(id) {
       cardContainer.removeChild(el);
     }
   });
+  resetCountId();
   createAndShowMessage("success", "Utente Eliminato con Successo");
 }
 
-function createAndShowMessage(type, message) {
-  while (messageContainer.hasChildNodes()) {
-    messageContainer.removeChild(messageContainer.firstChild);
-  }
-  let samp = document.createElement("samp");
-  if (type === "error") {
-    samp.textContent = message;
-    samp.classList.add("error");
+//
+searchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (!event.target.search.value) {
+    alert("Compila il campo");
   } else {
-    samp.textContent = message;
-    samp.classList.add("success");
-  }
-  messageContainer.appendChild(samp);
+    const key = event.target.search.value.replace(
+      event.target.search.value[0],
+      event.target.search.value[0].toUpperCase()
+    );
 
-  setTimeout(() => {
-    samp.classList.add("hidden");
-  }, 3000);
+    sendKeyFoeSearchRecord(key);
+    searchForm.reset();
+  }
+});
+
+// Reset count id
+function resetCountId() {
+  if (!cardContainer.hasChildNodes() || !tableContainer.hasChildNodes()) {
+    count = 0;
+  }
 }
+
+/*
+// SEND RECORD TO SERVER
+async function sendKeyFoeSearchRecord(key) {
+  const query = new URLSearchParams(key);
+  console.log(key);
+  try {
+    const res = await fetch("http://localhost:8000/search-user", {
+      method: "POST",
+      body: key
+    });
+    if (!res.ok) {
+      createAndShowMessage(
+        "error",
+        "Si è Verificato un Errore... Siamo Spiacenti, Riprovare più Tardi"
+      );
+      throw new Error(response.statusText);
+    }
+    const data = await res.json();
+    console.log(data);
+    constructTableDom(data);
+    constructCardsDom(data);
+  } catch (error) {
+    createAndShowMessage(
+      "error",
+      "Si è Verificato un Errore... Siamo Spiacenti, Riprovare più Tardi"
+    );
+    throw new Error("Ops.. Qualcosa è andato storto");
+  }
+}
+*/

@@ -1,5 +1,7 @@
+// CHANGE THEME
 const buttonTheme = document.getElementById("change-theme");
 
+// Check on sessionStorAge for the choise of the user, else set light theme default
 if (sessionStorage.getItem("theme") == "light") {
   document.body.classList.add("light");
 } else if (sessionStorage.getItem("theme") == "dark") {
@@ -18,6 +20,7 @@ if (sessionStorage.getItem("theme") == "light") {
   document.body.classList.add("light");
 }
 
+// Change theme on click
 buttonTheme.addEventListener("click", () => {
   if (document.body.classList.contains("light")) {
     document.body.classList.replace("light", "dark");
