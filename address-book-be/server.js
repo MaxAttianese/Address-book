@@ -34,19 +34,6 @@ fastify.post("/add-user", async (request, reply) => {
   }
 });
 
-//search
-/*fastify.post("/search-user", async (request, reply) => {
-    console.log(request.body);
-  try {
-    const response = await fetch("http://localhost:3000/users");
-    console.log(response);
-    return response;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Si è verificato iun errore!");
-  }
-});*/
-
 fastify.options("/delete-user/:id", (request, reply, done) => {
   reply.header("access-control-allow-origin", "*");
   reply.header("access-control-allow-methods", "DELETE");
@@ -55,7 +42,6 @@ fastify.options("/delete-user/:id", (request, reply, done) => {
 
 fastify.delete("/delete-user/:id", async (request, reply) => {
   const id = request.params.id;
-  console.log(id);
   try {
     const response = await fetch(`http://localhost:3000/users/${id}`, {
       method: "DELETE",
@@ -63,7 +49,7 @@ fastify.delete("/delete-user/:id", async (request, reply) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    throw new Error("Si è verificato iun errore!");
+    throw new Error("Si è verificato un errore!");
   }
 });
 

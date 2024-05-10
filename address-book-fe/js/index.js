@@ -1,15 +1,18 @@
 import "./theme.js";
 import "./view.js";
-import "./clear.js";
+import { searchInput } from "./clear.js";
 import {
   tableContainer,
   cardContainer,
   showNoneUserMessage,
   createAndShowMessage,
 } from "./message.js";
+import { addFormValidation, searchFormValidation } from "./validate.js";
+import { generateId, resetCountId } from "../models/Person.js";
 
 const addForm = document.getElementById("add-form");
 const searchForm = document.getElementById("search-form");
+const refreshButton = document.getElementById("reload");
 
 // GET DATA FROM SERVER
 async function getData() {
@@ -36,7 +39,7 @@ async function getData() {
       constructTableDom(data[i]);
       constructCardsDom(data[i]);
     }
-    showNoneUserMessage();
+    showNoneUserMessage("Non ci sono utenti nella tua rubrica, aggiungine qualcuno!");
   } catch (error) {
     createAndShowMessage(
       "error",
@@ -47,29 +50,11 @@ async function getData() {
 }
 getData();
 
-// GENERATE ID
-let count = 0;
-function generateId(lastId) {
-  count = lastId++;
-}
-
 // CREATE RECORD
 addForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  if (!event.target.firstname.value || !event.target.lastname.value) {
-    alert("Compila i campi");
-  } else {
-    const user = {
-      id: `${++count}`,
-      firstname: event.target.firstname.value.replace(
-        event.target.firstname.value[0],
-        event.target.firstname.value[0].toUpperCase()
-      ),
-      lastname: event.target.lastname.value.replace(
-        event.target.lastname.value[0],
-        event.target.lastname.value[0].toUpperCase()
-      ),
-    };
+  const user = addFormValidation(event);
+  if (user) {
     createRecord(user);
     addForm.reset();
   }
@@ -151,7 +136,9 @@ function constructCardsDom(user) {
     if (response) {
       removeUserFromDOM(user.id);
       deleteRecord(idUser);
-      showNoneUserMessage();
+      showNoneUserMessage(
+        "Non ci sono utenti nella tua rubrica, aggiungine qualcuno!"
+      );
     }
   });
   const iconTrash = document.createElement("i");
@@ -162,7 +149,9 @@ function constructCardsDom(user) {
 
   cardContainer.appendChild(article);
 
-  showNoneUserMessage();
+  showNoneUserMessage(
+    "Non ci sono utenti nella tua rubrica, aggiungine qualcuno!"
+  );
 }
 
 function constructTableDom(user) {
@@ -205,7 +194,9 @@ function constructTableDom(user) {
     if (response) {
       removeUserFromDOM(user.id);
       deleteRecord(idUser);
-      showNoneUserMessage();
+      showNoneUserMessage(
+        "Non ci sono utenti nella tua rubrica, aggiungine qualcuno!"
+      );
     }
   });
 
@@ -217,7 +208,9 @@ function constructTableDom(user) {
 
   tableContainer.appendChild(tr);
 
-  showNoneUserMessage();
+  showNoneUserMessage(
+    "Non ci sono utenti nella tua rubrica, aggiungine qualcuno!"
+  );
 }
 
 // SEND ID RECORD FOR DELETE IT
@@ -238,7 +231,6 @@ async function deleteRecord(id) {
       "error",
       "Si è Verificato un Errore... Siamo Spiacenti, Riprovare più Tardi"
     );
-    throw new Error(response.statusText);
   }
 }
 
@@ -256,39 +248,23 @@ function removeUserFromDOM(id) {
   createAndShowMessage("success", "Utente Eliminato con Successo");
 }
 
-//
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  if (!event.target.search.value) {
-    alert("Compila il campo");
-  } else {
-    const key = event.target.search.value.replace(
-      event.target.search.value[0],
-      event.target.search.value[0].toUpperCase()
-    );
 
-    sendKeyFoeSearchRecord(key);
-    searchForm.reset();
+  const key = searchFormValidation(event);
+  if (key) {
+    sendKeyForSearchRecord(key);
   }
 });
 
-// Reset count id
-function resetCountId() {
-  if (!cardContainer.hasChildNodes() || !tableContainer.hasChildNodes()) {
-    count = 0;
-  }
-}
 
-/*
-// SEND RECORD TO SERVER
-async function sendKeyFoeSearchRecord(key) {
-  const query = new URLSearchParams(key);
-  console.log(key);
+
+// SEND RECORD TO SERVER FOR SEARCH
+async function sendKeyForSearchRecord(key) {
+  const searchParams = { firstname: key };
+  const query = new URLSearchParams(searchParams);
   try {
-    const res = await fetch("http://localhost:8000/search-user", {
-      method: "POST",
-      body: key
-    });
+    const res = await fetch(`http://localhost:3000/users?${query.toString()}`);
     if (!res.ok) {
       createAndShowMessage(
         "error",
@@ -297,9 +273,7 @@ async function sendKeyFoeSearchRecord(key) {
       throw new Error(response.statusText);
     }
     const data = await res.json();
-    console.log(data);
-    constructTableDom(data);
-    constructCardsDom(data);
+    filteredDom(data);
   } catch (error) {
     createAndShowMessage(
       "error",
@@ -308,4 +282,30 @@ async function sendKeyFoeSearchRecord(key) {
     throw new Error("Ops.. Qualcosa è andato storto");
   }
 }
-*/
+
+function filteredDom(data) {
+  refreshButton.classList.remove("hidden");
+  clearDom();
+  for (let i = 0; i < data.length; i++) {
+    constructTableDom(data[i]);
+    constructCardsDom(data[i]);
+  }
+  showNoneUserMessage(
+    "Non ci sono utenti nella tua rubrica che corrispondono alla tua ricerca!"
+  );
+
+}
+
+refreshButton.addEventListener("click", () => {
+  clearDom();
+  getData();
+  searchInput.value = "";
+  refreshButton.classList.add("hidden");
+});
+
+function clearDom() {
+  while (tableContainer.hasChildNodes() && cardContainer.hasChildNodes()) {
+    tableContainer.removeChild(tableContainer.firstChild);
+    cardContainer.removeChild(cardContainer.firstChild);
+  }
+}

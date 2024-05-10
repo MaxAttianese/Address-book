@@ -1,11 +1,11 @@
 // CLEAR FORM
-const firstnameInputAddForm = document.getElementById("firstname");
+export const firstnameInputAddForm = document.getElementById("firstname");
 const firstnameInputClean = document.getElementById("firstname-clean");
 
-const lastnameInputAddForm = document.getElementById("lastname");
+export const lastnameInputAddForm = document.getElementById("lastname");
 const lastnameInputClean = document.getElementById("lastname-clean");
 
-const searchInput = document.getElementById("search");
+export const searchInput = document.getElementById("search");
 const searchInputClean = document.getElementById("search-clean");
 
 // Clear firstname input

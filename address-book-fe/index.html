@@ -46,16 +46,32 @@
             action="http://localhost:8000/add-user"
             method="POST"
           >
-            <div>
-              <label for="firstname"></label>
-              <input id="firstname" type="text" placeholder="Nome" />
+            <div class="form-input">
+              <div>
+                <label for="firstname">Nome <sup>*</sup></label>
+                <small
+                  name="firstname"
+                  data-input="not-validate-firstname"
+                  class="hidden"
+                  >Obbligatorio</small
+                >
+              </div>
+              <input id="firstname" type="text" placeholder="Mario" />
               <button id="firstname-clean" class="button-icon" type="click">
                 <i class="fa-solid fa-xmark"></i>
               </button>
             </div>
-            <div>
-              <label for="lastname"></label>
-              <input id="lastname" type="text" placeholder="Cognome" />
+            <div class="form-input">
+              <div>
+                <label for="lastname">Cognome <sup>*</sup></label>
+                <small
+                  name="lastname"
+                  data-input="not-validate-lastname"
+                  class="hidden"
+                  >Obbligatorio</small
+                >
+              </div>
+              <input id="lastname" type="text" placeholder="Rossi" />
               <button id="lastname-clean" class="button-icon" type="click">
                 <i class="fa-solid fa-xmark"></i>
               </button>
@@ -70,9 +86,16 @@
             action="http://localhost:8000/search-user"
             method="POST"
           >
-            <div>
-              <label for="search"></label>
-              <input id="search" type="text" placeholder="Nome e/o Cognome" />
+            <div class="form-input">
+              <div>
+                <label for="search">Nome/Cognome <sup>*</sup></label>
+                <small
+                  name="search"
+                  data-input="not-validate-search"
+                  class="hidden"
+                ></small>
+              </div>
+              <input id="search" type="text" placeholder="Mario o Rossi" />
               <button id="search-clean" class="button-icon" type="click">
                 <i class="fa-solid fa-xmark"></i>
               </button>
@@ -83,12 +106,15 @@
           </form>
         </div>
       </section>
-      <aside class="message-container">
-        
-      </aside>
-      <div>
+      <aside class="message-container"></aside>
+      <div class="view-refresh-container">
         <button type="click" id="change-view" class="button-view">
           <i id="icon-view" class="fa-solid"></i>
+        </button>
+      </div>
+      <div>
+        <button type="click" id="reload" class="button-icon hidden">
+          <i class="fa-solid fa-rotate-right"></i>
         </button>
       </div>
       <section id="table">
@@ -108,9 +134,7 @@
       </section>
       <section id="card-append" class="card-container hidden"></section>
       <aside>
-        <p id="none-user">
-          Non vi sono utenti nella tua rubrica, aggiungine qualcuno
-        </p>
+        <p id="none-users">Cazzo</p>
         <strong>Talent Academy | </strong><span>Front-end Basics</span>
       </aside>
     </main>

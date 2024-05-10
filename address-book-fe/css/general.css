@@ -33,7 +33,7 @@ main {
 }
 
 aside {
-  margin: calc(var(--spacing-extra-big) + 2.5rem) 0;
+  margin: var(--spacing-extra-big) 0 calc(var(--spacing-extra-big) + 2.5rem) 0;
   text-align: center;
 }
 
@@ -230,6 +230,15 @@ body.dark .button-theme {
 
 a:hover .icon-container {
   background-color: var(--secondary-color);
+}
+
+sup {
+  color: var(--red);
+  font-size: var(--font-size-h6);
+}
+
+small {
+  font-size: var(--font-size-p-small);
 }
 
 @media (max-width: 30em) {

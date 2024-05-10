@@ -1,18 +1,23 @@
 // MESSAGE
-const messageNoneContainer = document.getElementById("none-user");
+const messageNoneContainer = document.getElementById("none-users");
 const messageContainer = document.querySelector(".message-container");
 const table = document.querySelector("#table");
 
 export const cardContainer = document.getElementById("card-append");
 export const tableContainer = document.getElementById("table-append");
 
+export const noneMessage = document.getElementById("table-append");
+
+
 // Show a message when there aren't people
-export function showNoneUserMessage() {
+export function showNoneUserMessage(message) {
   if (!cardContainer.hasChildNodes() || !tableContainer.hasChildNodes()) {
     messageNoneContainer.classList.remove("hidden");
+    messageNoneContainer.textContent = message;
     table.classList.add("hidden");
   } else {
     messageNoneContainer.classList.add("hidden");
+    messageNoneContainer.textContent = "";
     table.classList.remove("hidden");
   }
 }

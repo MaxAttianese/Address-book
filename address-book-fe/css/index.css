@@ -196,18 +196,28 @@ article img {
 }
 
 .form-section form {
-  align-items: center;
+  align-items: end;
   display: flex;
   gap: var(--spacing-default);
 }
 
-form div {
+form .form-input {
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
 
-form div button {
+.form-input div {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-default);
+}
+
+.form-input button {
   position: absolute;
   right: 0;
+  top: 38px;
   z-index: 1;
 }
 
@@ -219,7 +229,7 @@ form div button {
   }
 }
 
-#none-user {
+#none-users {
   color: var(--primary-color);
   font-size: var(--font-size-h6);
 }
@@ -243,6 +253,13 @@ form div button {
 .error {
   color: var(--red);
 }
+.error-input-border {
+  border-color: var(--red);
+  &:hover {
+    border-color: var(--red);
+  }
+}
+
 
 /*Media Queries*/
 
