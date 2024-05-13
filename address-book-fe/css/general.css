@@ -13,6 +13,7 @@ body {
   font-size: var(--font-size-p-default);
   height: 100vh;
   min-width: 300px;
+  position: relative;
 }
 
 header {

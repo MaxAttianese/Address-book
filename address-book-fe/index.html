@@ -3,6 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Add a description of site for help SEO-->
+    <meta name="description" content="..." />
+    <!--Add Favicon for Desktop-->
+    <link rel="icon" type="image/x-icon" href="./favicon/favicon.png" />
+    <!--Add Favicon for Smartphone Apple-->
+    <link rel="apple-touch-icon" href="./favicon/favicon.png" />
+    <!--Add Favicon for Smartphone Android-->
+    <link rel="manifest" href="./manifest.webmanifest">
     <!--Font Awesome-->
     <link
       rel="stylesheet"
@@ -20,7 +28,7 @@
     />
     <!--Css-->
     <link rel="stylesheet" href="./css/index.css" />
-    <title>Max's Address Book</title>
+    <title>Rubrica</title>
   </head>
   <body>
     <header>
@@ -56,7 +64,13 @@
                   >Obbligatorio</small
                 >
               </div>
-              <input id="firstname" type="text" placeholder="Mario" />
+              <input
+                id="firstname"
+                type="text"
+                placeholder="Mario"
+                autocomplete="off"
+                required
+              />
               <button id="firstname-clean" class="button-icon" type="click">
                 <i class="fa-solid fa-xmark"></i>
               </button>
@@ -71,7 +85,13 @@
                   >Obbligatorio</small
                 >
               </div>
-              <input id="lastname" type="text" placeholder="Rossi" />
+              <input
+                id="lastname"
+                type="text"
+                placeholder="Rossi"
+                autocomplete="off"
+                required
+              />
               <button id="lastname-clean" class="button-icon" type="click">
                 <i class="fa-solid fa-xmark"></i>
               </button>
@@ -88,14 +108,20 @@
           >
             <div class="form-input">
               <div>
-                <label for="search">Nome/Cognome <sup>*</sup></label>
+                <label for="search">per Cognome <sup>*</sup></label>
                 <small
                   name="search"
                   data-input="not-validate-search"
                   class="hidden"
                 ></small>
               </div>
-              <input id="search" type="text" placeholder="Mario o Rossi" />
+              <input
+                id="search"
+                type="text"
+                placeholder="Mario o Rossi"
+                autocomplete="off"
+                required
+              />
               <button id="search-clean" class="button-icon" type="click">
                 <i class="fa-solid fa-xmark"></i>
               </button>

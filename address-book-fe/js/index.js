@@ -1,6 +1,6 @@
 import "./theme.js";
 import "./view.js";
-import { searchInput } from "./clear.js";
+import { searchInput, clearDom } from "./clear.js";
 import {
   tableContainer,
   cardContainer,
@@ -39,7 +39,9 @@ async function getData() {
       constructTableDom(data[i]);
       constructCardsDom(data[i]);
     }
-    showNoneUserMessage("Non ci sono utenti nella tua rubrica, aggiungine qualcuno!");
+    showNoneUserMessage(
+      "Non ci sono utenti nella tua rubrica, aggiungine qualcuno!"
+    );
   } catch (error) {
     createAndShowMessage(
       "error",
@@ -100,7 +102,7 @@ function constructCardsDom(user) {
   imgLinkContainer.appendChild(overlay);
 
   const idLink = document.createElement("a");
-  idLink.setAttribute("href", `/people`);
+  idLink.setAttribute("href", `./people/people.html?${user.id}`);
   idLink.setAttribute("title", "Apri la pagina del dettaglio");
   idLink.textContent = user.id;
   overlay.appendChild(idLink);
@@ -131,7 +133,7 @@ function constructCardsDom(user) {
   buttonDelete.setAttribute("type", "button");
   buttonDelete.classList.add("button-icon");
   buttonDelete.addEventListener("click", () => {
-    const response = confirm("Sei sicuro di volere eliminare questo utente?");
+    const response = confirm(`Sei sicuro di volere eliminare ${user.firstname} ${user.lastname} dalla tua rubrica?`);
     const idUser = user.id;
     if (response) {
       removeUserFromDOM(user.id);
@@ -164,7 +166,7 @@ function constructTableDom(user) {
   tdId.appendChild(spanId);
 
   let idLink = document.createElement("a");
-  idLink.setAttribute("href", "#");
+  idLink.setAttribute("href", `./people/people.html?${user.id}`);
   idLink.setAttribute("title", "Apri la pagina del dettaglio");
   idLink.textContent = user.id;
   spanId.appendChild(idLink);
@@ -190,7 +192,7 @@ function constructTableDom(user) {
   buttonDelete.addEventListener("click", (event) => {
     event.preventDefault();
     const idUser = user.id;
-    const response = confirm("Sei sicuro di volere eliminare questo utente?");
+    const response = confirm(`Sei sicuro di volere eliminare ${user.firstname} ${user.lastname} dalla tua rubrica?`);
     if (response) {
       removeUserFromDOM(user.id);
       deleteRecord(idUser);
@@ -257,14 +259,10 @@ searchForm.addEventListener("submit", (event) => {
   }
 });
 
-
-
 // SEND RECORD TO SERVER FOR SEARCH
 async function sendKeyForSearchRecord(key) {
-  const searchParams = { firstname: key };
-  const query = new URLSearchParams(searchParams);
   try {
-    const res = await fetch(`http://localhost:3000/users?${query.toString()}`);
+    const res = await fetch(`http://localhost:8000/search/${key}`);
     if (!res.ok) {
       createAndShowMessage(
         "error",
@@ -293,7 +291,6 @@ function filteredDom(data) {
   showNoneUserMessage(
     "Non ci sono utenti nella tua rubrica che corrispondono alla tua ricerca!"
   );
-
 }
 
 refreshButton.addEventListener("click", () => {
@@ -302,10 +299,3 @@ refreshButton.addEventListener("click", () => {
   searchInput.value = "";
   refreshButton.classList.add("hidden");
 });
-
-function clearDom() {
-  while (tableContainer.hasChildNodes() && cardContainer.hasChildNodes()) {
-    tableContainer.removeChild(tableContainer.firstChild);
-    cardContainer.removeChild(cardContainer.firstChild);
-  }
-}

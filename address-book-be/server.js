@@ -18,7 +18,35 @@ fastify.get("/", async (request, reply) => {
     return response;
   } catch (error) {
     console.log(error);
-    throw new Error("Si è verificato iun errore!");
+    throw new Error("Si è verificato un errore!");
+  }
+});
+
+fastify.get("/:id", async (request, reply) => {
+  try {
+    const searchParams = { id: request.params.id };
+    const query = new URLSearchParams(searchParams);
+    const response = await fetch(
+      `http://localhost:3000/users?${query.toString()}`
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Si è verificato un errore!");
+  }
+});
+
+fastify.get("/search/:id", async (request, reply) => {
+  try {
+    const searchParams = { lastname: request.params.id };
+    const query = new URLSearchParams(searchParams);
+    const response = await fetch(
+      `http://localhost:3000/users?${query.toString()}`
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Si è verificato un errore!");
   }
 });
 

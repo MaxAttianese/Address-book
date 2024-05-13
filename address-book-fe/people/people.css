@@ -110,6 +110,20 @@ address h3 {
   margin: 0;
 }
 
+.overlay {
+  background-color: rgba(0, 0, 0, 0.685);
+  height: 100vh;
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 100vw;
+}
+
+.hidden {
+  display: none;
+}
+
 @media (max-width: 84em) {
   .img-container {
     width: 100%;
